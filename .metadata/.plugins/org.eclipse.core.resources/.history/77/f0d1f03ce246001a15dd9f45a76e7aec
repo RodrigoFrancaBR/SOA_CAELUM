@@ -1,0 +1,5 @@
+package br.com.caelum.estoque.cliente;
+
+public class ClienteRmi {
+
+}

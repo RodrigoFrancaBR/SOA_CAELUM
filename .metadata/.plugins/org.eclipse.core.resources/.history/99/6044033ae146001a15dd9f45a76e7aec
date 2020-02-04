@@ -1,0 +1,20 @@
+package br.com.caelum.estoque.rmi;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class EstoqueService extends UnicastRemoteObject implements EstoqueRmi {
+
+	private static final long serialVersionUID = 1L;
+
+	public EstoqueService() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public ItemEstoque getItemEstoque(String codigoProduto) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

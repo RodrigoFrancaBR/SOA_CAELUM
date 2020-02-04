@@ -1,0 +1,7 @@
+package br.com.caelum.estoque.rmi;
+
+import java.rmi.Remote;
+
+public interface EstoqueRmi extends Remote {
+
+}

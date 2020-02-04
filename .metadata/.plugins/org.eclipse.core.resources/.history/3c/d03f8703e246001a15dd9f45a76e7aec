@@ -1,0 +1,10 @@
+package br.com.caelum.estoque.main;
+
+public class RegistraERodaService {
+
+	public static void main(String[] args) {
+		LocateRegistry.createRegistry(1099);
+		Naming.rebind("/estoque", new EstoqueService()); 
+		System.out.println("Estoque registrado e rodando");
+
+}

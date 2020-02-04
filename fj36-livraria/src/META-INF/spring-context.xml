@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd">
+<!-- 						http://camel.apache.org/schema/spring  -->
+<!-- 						http://camel.apache.org/schema/spring/camel-spring.xsd"> -->
+
+<!-- 	<camel:camelContext /> -->
+
+	<context:component-scan base-package="br.com.caelum" />
+	<tx:annotation-driven />
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="mysqlDataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="mysqlDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost/fj36" />
+		<property name="user" value="root" />
+		<property name="password" value="" />
+
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="5" />
+		<property name="maxIdleTime" value="100" />
+		<property name="acquireIncrement" value="1" />
+		<property name="maxStatements" value="50" />
+	</bean>
+	
+	
+	<!-- Configuração para acessar o JMS -->
+<!-- 	<bean id="jmsJndiTemplate" class="org.springframework.jndi.JndiTemplate"> -->
+<!-- 		<property name="environment"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="java.naming.factory.initial"> -->
+<!-- 					org.jboss.naming.remote.client.InitialContextFactory -->
+<!-- 				</prop> -->
+<!-- 				<prop key="java.naming.provider.url"> -->
+<!-- 					http-remoting://localhost:8080 -->
+<!-- 				</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="hornetQConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 		<property name="jndiTemplate" ref="jmsJndiTemplate" /> -->
+<!-- 		<property name="jndiName" value="jms/RemoteConnectionFactory" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="topicoLivraria" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 		<property name="jndiTemplate" ref="jmsJndiTemplate" /> -->
+<!-- 		<property name="jndiName" value="jms/TOPICO.LIVRARIA" /> -->
+<!-- 	</bean> -->
+
+
+	<!-- Configuração do JMS para o Camel -->
+<!-- 	<bean id="camelDestinationResolver" -->
+<!-- 		class="org.springframework.jms.support.destination.JndiDestinationResolver"> -->
+<!-- 		<property name="jndiTemplate" ref="jmsJndiTemplate" /> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="camelJMSConfig" class="org.apache.camel.component.jms.JmsConfiguration"> -->
+<!-- 		<property name="connectionFactory" ref="hornetQConnectionFactory" /> -->
+<!-- 		<property name="destinationResolver" ref="camelDestinationResolver" /> -->
+<!-- 	</bean> -->
+
+</beans>

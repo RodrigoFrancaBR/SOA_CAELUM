@@ -1,0 +1,27 @@
+package br.com.caelum.estoque.rmi;
+
+public class ItemEstoque {
+	private String codigo;
+	private Integer quantidade;
+
+	public ItemEstoque(String string, int i) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+}
