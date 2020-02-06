@@ -3,7 +3,6 @@ package br.com.caelum.livraria.modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -16,8 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import br.com.caelum.estoque.rmi.EstoqueRmi;
-import br.com.caelum.estoque.rmi.ItemEstoque;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
+import br.com.caelum.correios.soap.ConsumidorServicoCorreios;
+import br.com.caelum.estoque.soap.AuthorizationException_Exception;
+import br.com.caelum.estoque.soap.EstoqueWS;
+import br.com.caelum.estoque.soap.EstoqueWSService;
+import br.com.caelum.estoque.soap.ItemEstoque;
+import br.com.caelum.estoque.soap.ItensPeloCodigo;
+import br.com.caelum.estoque.soap.ItensPeloCodigoResponse;
 import br.com.caelum.livraria.jms.EnviadorMensagemJms;
 import br.com.caelum.livraria.rest.ClienteRest;
 
@@ -101,9 +108,12 @@ public class Carrinho implements Serializable {
 	}
 
 	public void atualizarFrete(final String novoCepDestino) {
+		
 		this.cepDestino = novoCepDestino;
 
 		// servico web do correios aqui
+		ConsumidorServicoCorreios servicoCorreios = new ConsumidorServicoCorreios();
+		this.valorFrete = servicoCorreios.calculaFrete(novoCepDestino);
 	}
 
 	public String getCepDestino() {
@@ -158,19 +168,17 @@ public class Carrinho implements Serializable {
 		return false;
 	}
 
-	// private void atualizarQuantidadeDisponivelDoItemCompra(final ItemEstoque
-	// itemEstoque) {
-	// ItemCompra item = Iterables.find(this.itensDeCompra, new
-	// Predicate<ItemCompra>() {
-	//
-	// @Override
-	// public boolean apply(ItemCompra item) {
-	// return item.temCodigo(itemEstoque.getCodigo());
-	// }
-	// });
-	//
-	// item.setQuantidadeNoEstoque(itemEstoque.getQuantidade());
-	// }
+	private void atualizarQuantidadeDisponivelDoItemCompra(final ItemEstoque itemEstoque) {
+		ItemCompra item = Iterables.find(this.itensDeCompra, new Predicate<ItemCompra>() {
+
+			@Override
+			public boolean apply(ItemCompra item) {
+				return item.temCodigo(itemEstoque.getCodigo());
+			}
+		});
+
+		item.setQuantidadeNoEstoque(itemEstoque.getQuantidade());
+	}
 
 	private void limparCarrinho() {
 		this.itensDeCompra = new LinkedHashSet<>();
@@ -232,9 +240,19 @@ public class Carrinho implements Serializable {
 		return numeroCartao != null && titularCartao != null;
 	}
 
-	public void verificarDisponibilidadeDosItensComRmi()
-			throws MalformedURLException, RemoteException, NotBoundException {
-		EstoqueRmi estoque = (EstoqueRmi) Naming.lookup("rmi://localhost:1099/estoque");
+	public void verificarDisponibilidadeDosItensComSoap()
+			throws MalformedURLException, RemoteException, NotBoundException, AuthorizationException_Exception {
+		EstoqueWS  estoqueWs = new EstoqueWSService().getEstoqueWSPort();
+		List<String> codigos = this.getCodigosDosItensImpressos();
+		 ItensPeloCodigo itensPeloCodigo = new ItensPeloCodigo();
+		 itensPeloCodigo.getCodigo().addAll(codigos);
+		 ItensPeloCodigoResponse resposta = estoqueWs.itensPeloCodigo(itensPeloCodigo, "TOKEN123");
+		 List<ItemEstoque> itemEstoque = resposta.getItemEstoque();
+		 for (ItemEstoque item : itemEstoque) {
+			atualizarQuantidadeDisponivelDoItemCompra(item);
+		}
+	}
+		/*EstoqueRmi estoque = (EstoqueRmi) Naming.lookup("rmi://localhost:1099/estoque");
 		for (ItemCompra itemCompra : itensDeCompra) {
 			if (itemCompra.isImpresso()) {
 				System.out.println("Verificaçáo da quantidade do livro: " + itemCompra.getTitulo());
@@ -243,5 +261,5 @@ public class Carrinho implements Serializable {
 			}
 		}
 
-	}
+	}*/
 }
