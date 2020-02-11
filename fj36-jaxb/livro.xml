@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:livro xmlns:ns2="http://www.caelum.com.br/fj36">
+	<categoria>
+		<nome>TI</nome>
+	</categoria>
+	<codigo>AARQ</codigo>
+	<nomeAutor>Paulo</nomeAutor>
+	<titulo>Arquitetura</titulo>
+	<valor>29.90</valor>
+</ns2:livro>
