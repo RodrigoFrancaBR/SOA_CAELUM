@@ -1,7 +1,0 @@
-package br.com.caelum.estoque.cliente;
-
-public class ClienteRmi {
-	public static void main(String[] args) {
-
-	}
-}

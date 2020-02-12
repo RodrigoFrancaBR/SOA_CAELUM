@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib-camel/camel-core-2.14.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/camel-jms-2.14.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/camel-spring-2.14.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib-camel/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/spring-core-4.1.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib-camel/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="lib-camel/modeloLivro.jar"/>
+	<classpathentry kind="lib" path="lib-camel/camel-http-2.14.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/camel-jdbc-2.14.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/camel-xstream-2.14.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="lib-camel/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="lib-camel/fluent-hc-4.3.6.jar"/>
+	<classpathentry kind="lib" path="lib-camel/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="lib-camel/httpclient-cache-4.3.6.jar"/>
+	<classpathentry kind="lib" path="lib-camel/httpcore-4.3.3.jar"/>
+	<classpathentry kind="lib" path="lib-camel/httpmime-4.3.6.jar"/>
+	<classpathentry kind="lib" path="lib-camel/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib-camel/jettison-1.3.7.jar"/>
+	<classpathentry kind="lib" path="lib-camel/livro.jar"/>
+	<classpathentry kind="lib" path="lib-camel/mysql-connector-java-5.1.28-bin.jar"/>
+	<classpathentry kind="lib" path="lib-camel/xmlpull-1.1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib-camel/xpp3_min-1.1.4c.jar"/>
+	<classpathentry kind="lib" path="lib-camel/xstream-1.4.7.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

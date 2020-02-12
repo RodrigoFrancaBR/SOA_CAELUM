@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pedido>
+    <data>2013-12-05T18:10:07.963-02:00</data>
+    <itens>
+        <item>
+            <formato>EBOOK</formato>
+            <quantidade>1</quantidade>
+            <livro>
+                <codigo>SOA</codigo>
+                <titulo>SOA aplicado: Integrando com web services e além</titulo>
+                <tituloCurto>SOA</tituloCurto>
+                <nomeAutor>Alexandre Saudate</nomeAutor>
+                <valorEbook>29.90</valorEbook>
+                <valorImpresso>59.90</valorImpresso>
+            </livro>
+        </item>
+    </itens>
+    <pagamento>
+    <status>CONFIRMADO</status>
+    <valor>20.90</valor>
+    </pagamento>
+</pedido>

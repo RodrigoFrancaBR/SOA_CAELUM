@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="itemCompra" type="itemCompra"/>
+  <xs:element name="pedido" type="pedido"/>
+
+  <xs:complexType name="pedido">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="data" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="itens" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item" type="itemCompra" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="pagamento" type="pagamento" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemCompra">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="formato" type="formato" minOccurs="0"/>
+      <xs:element name="quantidade" type="xs:int" minOccurs="0"/>
+      <xs:element name="quantidadeEstoque" type="xs:int" minOccurs="0"/>
+      <xs:element name="livro" type="livro" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="livro">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="codigo" type="xs:string" minOccurs="0"/>
+      <xs:element name="titulo" type="xs:string" minOccurs="0"/>
+      <xs:element name="tituloCurto" type="xs:string" minOccurs="0"/>
+      <xs:element name="nomeAutor" type="xs:string" minOccurs="0"/>
+      <xs:element name="imagem" type="xs:string" minOccurs="0"/>
+      <xs:element name="valorEbook" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="valorImpresso" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="descricao" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pagamento">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="valor" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="links" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="formato">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EBOOK"/>
+      <xs:enumeration value="IMPRESSO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
