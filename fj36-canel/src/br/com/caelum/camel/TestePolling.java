@@ -66,7 +66,7 @@ public class TestePolling {
 						
 					}
 				})
-				.setBody(simple("insert into Livros (nomeAutor) values (':?autor')"))
+				.setBody(simple("insert into Livros (nomeAutor) values (:?autor)"))
 				.to("jdbc:mysqlDataSource?useHeadersAsParameters=true");
 			}
 		});

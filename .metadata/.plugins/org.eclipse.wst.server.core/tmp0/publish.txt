@@ -1,4 +1,4 @@
 #Tomcat publish data
-#Thu Feb 06 21:42:35 BRST 2020
+#Tue Feb 11 21:33:11 BRST 2020
 org.eclipse.jst.jee.server\:/binary\:/home/soa8872/eclipse-workspace/fj36-livraria/WebContent/WEB-INF/lib/spring-web-4.1.3.RELEASE.jar=/home/soa8872/soa8872/apache-tomcat-7.0.50/wtpwebapps/fj36-livraria/WEB-INF/lib/spring-web-4.1.3.RELEASE.jar
 org.eclipse.jst.jee.server\:fj36-livraria=/home/soa8872/soa8872/apache-tomcat-7.0.50/wtpwebapps/fj36-livraria
