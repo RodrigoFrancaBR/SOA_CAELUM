@@ -1,5 +1,8 @@
 package br.com.caelum.livraria.camel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -24,7 +27,19 @@ public class ConfiguracaoCamel {
 			public void configure() throws Exception {
 				from("jms:topic:jms/TOPICO.LIVRARIA?username=jms&password=jms2")
 						.log(LoggingLevel.INFO, "CAMEL: Recebendo MSG ${id}")
-						.to("jms:queue:jms/FILA.GERADOR?username=jms&password=jms2");
+						.filter().xpath("/pedido/itens/item/formato[text()='EBOOK']")
+						.split().xpath("/pedido/itens")
+						.to("direct:notas")
+						.log(LoggingLevel.INFO, "Camel: Recebendo msg ${id}")
+						.filter().xpath("/pedido/itens")
+					    .to("jms:queue:jms/FILA.GERADOR?username=jms&password=jms2");
+				
+				from ("direct:notas")
+				.setHeader("data", constant(new SimpleDateFormat("dd/MM/yyyy").format(new Date())))
+				.split().xpath("/pedido/pagamento")
+				.convertBodyTo(String.class)
+				.to("velocity:nota.vm")
+				.log(LoggingLevel.INFO, "CAMEL: MSG transformando com velocity ${body}");
 
 			}
 

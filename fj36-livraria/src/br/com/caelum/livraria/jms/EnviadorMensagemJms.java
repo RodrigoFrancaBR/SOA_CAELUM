@@ -6,7 +6,6 @@ import javax.jms.ConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.JMSProducer;
 import javax.jms.Topic;
-import javax.sql.rowset.serial.SerialArray;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
